@@ -1,10 +1,11 @@
 from terminaltables import SingleTable
+import random
 
 table_data = [
-        ['    ', '    ', '    ', '    '],
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['', '', '', ''],
+    ['    ', '    ', '    ', '    '],
+    ['    ', '    ', '    ', '    '],
+    ['    ', '    ', '    ', '    '],
+    ['    ', '    ', '    ', '    '],
 ]
 
 def draw_grid():
@@ -24,11 +25,14 @@ def draw_grid_init():
     
     table_data = [
         ['    ', '    ', '    ', '    '],
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['', '', '', ''],
+        ['    ', '    ', '    ', '    '],
+        ['    ', '    ', '    ', '    '],
+        ['    ', '    ', '    ', '    '],
     ]
     
+    add_random()
+    add_random()
+
     table_instance = SingleTable(table_data, 'Play Game')
     table_instance.inner_heading_row_border = False
     table_instance.inner_row_border = True
@@ -36,7 +40,6 @@ def draw_grid_init():
     print(table_instance.table)
 
 def draw_updated_grid():
-    table_data[2][2] = 'hi'
     table_instance = SingleTable(table_data, 'Play Game')
     table_instance.inner_heading_row_border = False
     table_instance.inner_row_border = True
@@ -54,6 +57,31 @@ def move_left():
 
 def move_right():
     print("RIGHT")    
+
+def add_random():
+    print("RANDOM")
+    # Choose random value (2 or 4)
+    val = 0
+    random_num = random.randint(0, 2)
+    if random_num == 0:
+        val = 2
+    else:
+        val = 4
+
+    # Choose random column
+    random_col = random.randint(0, 3)
+    # Choose random row
+    random_row = random.randint(0, 3)
+
+    # Pick a new position if this one is invalid
+    while (table_data[random_row][random_col] != '    '):
+        # Choose random column
+        random_col = random.randint(0, 3)
+        # Choose random row
+        random_row = random.randint(0, 3)
+    
+    table_data[random_row][random_col] = val
+
 
 def main():
     draw_grid()
@@ -80,6 +108,8 @@ def main():
             print("Invalid input! Try again")
             continue
 
+        draw_updated_grid()
+        add_random()
         draw_updated_grid()
         
 
