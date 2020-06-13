@@ -26,11 +26,40 @@ def draw_grid_init():
     table_instance.justify_columns = {0: 'center', 1: 'center', 2: 'center', 3: 'center'}
     return table_instance.table
 
+def move_up():
+    print("UP")
+
+def move_down():
+    print("DOWN")
+
+def move_left():
+    print("LEFT")
+
+def move_right():
+    print("RIGHT")    
+
 def main():
     print(draw_grid())
-    print("DONE")
-    print(draw_grid_init())
-    print("OK")
+ 
+    user_input = 'W'
+    while user_input != 'Q':
+        user_input = input("Choose a move: (Up = W, Left = A, Down = S, Right = D, Quit = Q) ")
+        if (user_input == 'W' or user_input == 'w'):
+            move_up()
+        elif (user_input == 'A' or user_input == 'a'):
+            move_left()
+        elif (user_input == 'S' or user_input == 's'):
+            move_down()
+        elif (user_input == 'D' or user_input == 'd'):
+            move_right()
+        elif (user_input == 'Q' or user_input == 'q'):
+            print("Quitting Game")
+            exit()
+        else:
+            print("Invalid input! Try again")
+            continue
+
+        print(draw_grid_init())
 
 if __name__ == "__main__":
     main()
