@@ -1,5 +1,12 @@
 from terminaltables import SingleTable
 
+table_data = [
+        ['    ', '    ', '    ', '    '],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+]
+
 def draw_grid():
     table_data = [
         ['00', '01', '02', '03'],
@@ -11,20 +18,30 @@ def draw_grid():
     table_instance.inner_heading_row_border = False
     table_instance.inner_row_border = True
     table_instance.justify_columns = {0: 'center', 1: 'center', 2: 'center', 3: 'center'}
-    return table_instance.table
+    print(table_instance.table)
 
 def draw_grid_init():
+    
     table_data = [
         ['    ', '    ', '    ', '    '],
         ['', '', '', ''],
         ['', '', '', ''],
         ['', '', '', ''],
     ]
+    
     table_instance = SingleTable(table_data, 'Play Game')
     table_instance.inner_heading_row_border = False
     table_instance.inner_row_border = True
     table_instance.justify_columns = {0: 'center', 1: 'center', 2: 'center', 3: 'center'}
-    return table_instance.table
+    print(table_instance.table)
+
+def draw_updated_grid():
+    table_data[2][2] = 'hi'
+    table_instance = SingleTable(table_data, 'Play Game')
+    table_instance.inner_heading_row_border = False
+    table_instance.inner_row_border = True
+    table_instance.justify_columns = {0: 'center', 1: 'center', 2: 'center', 3: 'center'}
+    print(table_instance.table)
 
 def move_up():
     print("UP")
@@ -39,8 +56,12 @@ def move_right():
     print("RIGHT")    
 
 def main():
-    print(draw_grid())
+    draw_grid()
  
+    user_input = input("Start Game: (Press any key and hit Enter)")
+    if user_input:
+        draw_grid_init()
+
     user_input = 'W'
     while user_input != 'Q':
         user_input = input("Choose a move: (Up = W, Left = A, Down = S, Right = D, Quit = Q) ")
@@ -59,7 +80,8 @@ def main():
             print("Invalid input! Try again")
             continue
 
-        print(draw_grid_init())
+        draw_updated_grid()
+        
 
 if __name__ == "__main__":
     main()
