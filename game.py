@@ -110,9 +110,65 @@ def move_down():
 
 def move_left():
     print("LEFT")
+    
+    # Repeat for each row
+    for row in range(4):
+        # Get the row data
+        col_data = []
+        for column in range(4):
+            print(table_data[row][column])
+            if table_data[row][column] != '    ':
+                col_data.append(table_data[row][column])
+        print(col_data)
+
+        # Combine within list of row data
+        for item in range(len(col_data) - 1):
+            if (item + 1) >= len(col_data):
+                break
+            if col_data[item] == col_data[item + 1]:
+                col_data[item] = 2 * col_data[item + 1]
+                col_data.pop(item + 1)
+        print("NOW", col_data)
+        
+        # Put in placeholder spaces
+        if (len(col_data) < 4):
+            for amt in range(4 - len(col_data)):
+                col_data.append('    ')
+
+        # Update table_data
+        for item in range(len(col_data)):
+            table_data[row][item] = col_data[item]
 
 def move_right():
-    print("RIGHT")    
+    print("RIGHT") 
+
+    # Repeat for each row
+    for row in range(4):
+        # Get the row data
+        col_data = []
+        for column in range(3, -1, -1):
+            print(table_data[row][column])
+            if table_data[row][column] != '    ':
+                col_data.append(table_data[row][column])
+        print(col_data)
+
+        # Combine within list of row data
+        for item in range(len(col_data) - 1):
+            if (item + 1) >= len(col_data):
+                break
+            if col_data[item] == col_data[item + 1]:
+                col_data[item] = 2 * col_data[item + 1]
+                col_data.pop(item + 1)
+        print("NOW", col_data)
+        
+        # Put in placeholder spaces
+        if (len(col_data) < 4):
+            for amt in range(4 - len(col_data)):
+                col_data.append('    ')
+        print("len is ", len(col_data))
+        # Update table_data
+        for item in range(len(col_data)):
+            table_data[row][item] = col_data[3 - item]  
 
 def add_random():
     print("RANDOM")
