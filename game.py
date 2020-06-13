@@ -48,6 +48,7 @@ def draw_updated_grid():
 
 def move_up():
     print("UP")
+    up_ok = toggle('up')
 
     # Repeat for each column
     for column in range(4):
@@ -76,6 +77,7 @@ def move_up():
 
 def move_down():
     print("DOWN")
+    down_ok = toggle('down')
     
     # Repeat for each column
     for column in range(4):
@@ -104,10 +106,11 @@ def move_down():
 
 def move_left():
     print("LEFT")
+    left_ok = toggle('left')
     
     # Repeat for each row
     for row in range(4):
-        # Get the row data
+        # Get the column data
         col_data = []
         for column in range(4):
             if table_data[row][column] != '    ':
@@ -132,10 +135,11 @@ def move_left():
 
 def move_right():
     print("RIGHT") 
+    right_ok = toggle('right')
 
     # Repeat for each row
     for row in range(4):
-        # Get the row data
+        # Get the column data
         col_data = []
         for column in range(3, -1, -1):
             if table_data[row][column] != '    ':
@@ -182,6 +186,48 @@ def add_random():
     
     table_data[random_row][random_col] = val
 
+def toggle(choice):
+    if choice == 'up' or choice == 'down':
+        for column in range(4):
+            row_data = []
+            for row in range(4):
+                if table_data[row][column] != '    ':
+                    row_data.append(table_data[row][column])
+            if len(row_data) < 4:
+                return True
+            for item in range(len(row_data) - 1):
+                if row_data[item] == row_data[item + 1]:
+                    return True
+            return False
+
+    if choice == 'left' or choice == 'right':
+        for row in range(4):
+            col_data = []
+            for column in range(4):
+                if table_data[row][column] != '    ':
+                    col_data.append(table_data[row][column])
+            if len(col_data) < 4:
+                return True
+            for item in range(len(col_data) - 1):
+                if col_data[item] == col_data[item + 1]:
+                    return True
+            return False
+
+        return False
+
+
+def check_lose():
+    up_ok = toggle('up')
+    down_ok = toggle('down')
+    right_ok = toggle('right')
+    left_ok = toggle('left')
+
+    if up_ok or down_ok or right_ok or left_ok:
+        return
+    else:
+        print("You Lose!")
+        exit()
+
 def check_win():
     for row in table_data:
         if 2048 in row:
@@ -217,6 +263,7 @@ def main():
         add_random()
         draw_updated_grid()
 
+        check_lose()
         check_win()
         
 
