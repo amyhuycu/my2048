@@ -54,10 +54,8 @@ def move_up():
         # Get the row data
         row_data = []
         for row in range(4):
-            print(table_data[row][column])
             if table_data[row][column] != '    ':
                 row_data.append(table_data[row][column])
-        print(row_data)
 
         # Combine within list of row data
         for item in range(len(row_data) - 1):
@@ -66,7 +64,6 @@ def move_up():
             if row_data[item] == row_data[item + 1]:
                 row_data[item] = 2 * row_data[item + 1]
                 row_data.pop(item + 1)
-        print("NOW", row_data)
         
         # Put in placeholder spaces
         if (len(row_data) < 4):
@@ -85,10 +82,8 @@ def move_down():
         # Get the row data
         row_data = []
         for row in range(3, -1, -1):
-            print(table_data[row][column])
             if table_data[row][column] != '    ':
                 row_data.append(table_data[row][column])
-        print(row_data)
 
         # Combine within list of row data
         for item in range(len(row_data) - 1):
@@ -97,13 +92,12 @@ def move_down():
             if row_data[item] == row_data[item + 1]:
                 row_data[item] = 2 * row_data[item + 1]
                 row_data.pop(item + 1)
-        print("NOW", row_data)
         
         # Put in placeholder spaces
         if (len(row_data) < 4):
             for amt in range(4 - len(row_data)):
                 row_data.append('    ')
-        print("len is ", len(row_data))
+    
         # Update table_data
         for item in range(len(row_data)):
             table_data[item][column] = row_data[3 - item]
@@ -116,10 +110,8 @@ def move_left():
         # Get the row data
         col_data = []
         for column in range(4):
-            print(table_data[row][column])
             if table_data[row][column] != '    ':
                 col_data.append(table_data[row][column])
-        print(col_data)
 
         # Combine within list of row data
         for item in range(len(col_data) - 1):
@@ -128,7 +120,6 @@ def move_left():
             if col_data[item] == col_data[item + 1]:
                 col_data[item] = 2 * col_data[item + 1]
                 col_data.pop(item + 1)
-        print("NOW", col_data)
         
         # Put in placeholder spaces
         if (len(col_data) < 4):
@@ -147,10 +138,8 @@ def move_right():
         # Get the row data
         col_data = []
         for column in range(3, -1, -1):
-            print(table_data[row][column])
             if table_data[row][column] != '    ':
                 col_data.append(table_data[row][column])
-        print(col_data)
 
         # Combine within list of row data
         for item in range(len(col_data) - 1):
@@ -159,13 +148,12 @@ def move_right():
             if col_data[item] == col_data[item + 1]:
                 col_data[item] = 2 * col_data[item + 1]
                 col_data.pop(item + 1)
-        print("NOW", col_data)
         
         # Put in placeholder spaces
         if (len(col_data) < 4):
             for amt in range(4 - len(col_data)):
                 col_data.append('    ')
-        print("len is ", len(col_data))
+        
         # Update table_data
         for item in range(len(col_data)):
             table_data[row][item] = col_data[3 - item]  
@@ -194,6 +182,11 @@ def add_random():
     
     table_data[random_row][random_col] = val
 
+def check_win():
+    for row in table_data:
+        if 2048 in row:
+            print("You Win!")
+            exit()
 
 def main():
     draw_grid()
@@ -223,6 +216,8 @@ def main():
         draw_updated_grid()
         add_random()
         draw_updated_grid()
+
+        check_win()
         
 
 if __name__ == "__main__":
