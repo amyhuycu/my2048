@@ -49,6 +49,32 @@ def draw_updated_grid():
 def move_up():
     print("UP")
 
+    # Repeat for each column
+    for column in range(4):
+        # Get the row data
+        row_data = []
+        for row in range(4):
+            print(table_data[row][column])
+            if table_data[row][column] != '    ':
+                row_data.append(table_data[row][column])
+        print(row_data)
+
+        # Combine within list of row data
+        for item in range(len(row_data) - 1):
+            if row_data[item] == row_data[item + 1]:
+                row_data[item] = 2 * row_data[item + 1]
+                row_data.pop(item + 1)
+        print("NOW", row_data)
+        
+        # Put in placeholder spaces
+        if (len(row_data) < 4):
+            for amt in range(4 - len(row_data)):
+                row_data.append('    ')
+
+        # Update table_data
+        for item in range(len(row_data)):
+            table_data[item][column] = row_data[item]
+
 def move_down():
     print("DOWN")
 
